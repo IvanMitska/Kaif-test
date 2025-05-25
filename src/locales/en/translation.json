@@ -1,0 +1,321 @@
+{
+  "navigation": {
+    "home": "Home",
+    "restaurant": "Restaurant",
+    "spa": "SPA",
+    "sports": "Sports",
+    "beauty": "Beauty Salon",
+    "spa_and_beauty": "SPA & Beauty",
+    "about": "About Us",
+    "promotions": "Promotions",
+    "contacts": "Contacts"
+  },
+  "common": {
+    "book": "Book Now",
+    "book_now": "Book Now",
+    "learn_more": "Learn More",
+    "view_all": "View All",
+    "read_more": "Read More",
+    "submit": "Submit",
+    "scroll_down": "Scroll",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "date": "Date",
+    "time": "Time",
+    "people": "People",
+    "special_requests": "Special Requests",
+    "address": "73, Baan Chalekiri Village, 6 Pra Phuket Keaw Road, Kathu",
+    "phone_number": "+66 62 480 5877",
+    "select_language": "Select Language",
+    "photo_placeholder": "Photo will be added"
+  },
+  "home": {
+    "hero": {
+      "title": "KAIF - Jungle Club & Spa",
+      "subtitle": "Ultimate Relaxation and Wellness Experience in Phuket",
+      "cta": "Explore Our Services"
+    },
+    "services": {
+      "title": "Our Services",
+      "restaurant": {
+        "title": "Restaurant",
+        "description": "Experience 5 different cuisines in our exceptional restaurant"
+      },
+      "spa": {
+        "title": "SPA",
+        "description": "Rejuvenate yourself in Thailand's largest sauna"
+      },
+      "sports": {
+        "title": "Sports Facilities",
+        "description": "Stay fit with our 70+ equipment gym and specialized areas"
+      },
+      "beauty": {
+        "title": "Beauty Salon",
+        "description": "Full-cycle salon for all your beauty needs"
+      }
+    },
+    "promotions": {
+      "title": "Special Offers",
+      "day_pass": {
+        "title": "Day in Complex",
+        "price": "390 THB",
+        "description": "Access to gym, pool, ice bath and sauna"
+      },
+      "charity": {
+        "title": "Charity Workout",
+        "price": "200 THB",
+        "description": "Saturday training with professional athletes, proceeds go to Child Watch Phuket Foundation"
+      }
+    },
+    "about_preview": {
+      "title": "About KAIF",
+      "description": "KAIF is Phuket's premier wellness complex offering world-class facilities for mind, body and soul",
+      "features": {
+        "largest_sauna": "Thailand's largest sauna (50m²)",
+        "hammams": "Thai and Turkish hammams",
+        "restaurant": "Restaurant with 5 cuisines",
+        "gym": "70+ equipment gym",
+        "pool": "25m swimming pool",
+        "fight_club": "Professional fight club"
+      }
+    },
+    "location": {
+      "title": "Find Us",
+      "description": "Conveniently located in Kathu, just minutes away from Patong"
+    }
+  },
+  "restaurant": {
+    "title": "Restaurant",
+    "description": "Experience the exceptional flavors from five different cuisines in our restaurant",
+    "menu": {
+      "title": "Our Menu",
+      "description": "Discover a variety of flavors in our menu created by talented chefs",
+      "coming_soon": "Our menu with detailed dish information will be available here soon",
+      "categories": {
+        "breakfast": "Breakfast",
+        "soups": "Soups",
+        "salads": "Salads & Appetizers",
+        "main": "Main Courses"
+      }
+    },
+    "booking": {
+      "title": "Book a Table",
+      "description": "Reserve your table to guarantee your spot",
+      "coming_soon": "Online booking will be available soon. For now, please call us for reservations."
+    },
+    "cuisines": {
+      "title": "Our Cuisines",
+      "description": "Experience culinary delights from around the world"
+    },
+    "chef": "Chef's Recommendations",
+    "slider": {
+      "slide1": {
+        "title": "Exquisite Cuisine",
+        "description": "Discover unique flavors from five different world cuisines in our restaurant"
+      },
+      "slide2": {
+        "title": "Comfortable Atmosphere",
+        "description": "Enjoy your meal in a cozy atmosphere with a view of the tropical garden"
+      },
+      "slide3": {
+        "title": "Fresh Ingredients",
+        "description": "We use only fresh and quality ingredients to prepare our dishes"
+      }
+    },
+    "bookTable": "Book a Table",
+    "dish_details": {
+      "ingredients": "Ingredients",
+      "nutritional_info": "Nutritional Information"
+    }
+  },
+  "spa": {
+    "title": "SPA",
+    "description": "Rejuvenate your mind and body in Thailand's largest sauna",
+    "services": {
+      "title": "Our Services",
+      "categories": {
+        "sauna": "Sauna",
+        "hammam": "Hammam",
+        "massage": "Massage",
+        "treatments": "SPA Treatments"
+      }
+    },
+    "booking": {
+      "title": "Book a Treatment",
+      "description": "Reserve your SPA experience"
+    },
+    "facility": {
+      "title": "Our Facilities",
+      "largest_sauna": "Largest sauna in Thailand (50m²)",
+      "hammams": "Thai and Turkish hammams"
+    }
+  },
+  "sports": {
+    "title": "Sports Facilities",
+    "description": "State-of-the-art exercise facilities for everyone",
+    "hero": {
+      "tag": "Fitness & Sports",
+      "title": "Reach new <span>sports heights</span> with KAIF",
+      "subtitle": "At KAIF Jungle Club & SPA you will find everything you need for an active lifestyle, workouts and sports recreation in an atmosphere of luxury and comfort.",
+      "stats": {
+        "facilities": "Sports Facilities",
+        "trainers": "Professional Trainers",
+        "access": "Access for Residents"
+      }
+    },
+    "gym": {
+      "tag": "Our Services",
+      "facility_tag": "Fitness",
+      "section_title": "Premium Sports Facilities",
+      "section_subtitle": "Discover the world of fitness and sports at KAIF Jungle Club. Our modern services are designed to give you the opportunity to train with pleasure and reach new heights.",
+      "title": "Gym",
+      "description1": "Spacious modern gym with cardio and strength equipment of high class. The gym is equipped with everything necessary for full-fledged training and maintaining physical fitness.",
+      "description2": "Guests have access to personal lockers, showers, as well as personal trainer services by appointment."
+    },
+    "dance": {
+      "facility_tag": "Dancing",
+      "title": "Dance Studio",
+      "description1": "Spacious dance studio with professional parquet flooring, mirrored walls and modern audio system.",
+      "description2": "The studio offers group and individual lessons in various directions: modern dance, ballroom dancing, yoga, stretching, pilates and other directions.",
+      "schedule_button": "Schedule"
+    },
+    "gallery": {
+      "tag": "Our Moments",
+      "title": "Gallery",
+      "subtitle": "Captured moments of sports life at KAIF Jungle Club & SPA. Join our community and share your own achievements",
+      "yoga": "Sunset Yoga",
+      "subtitle_yoga": "Daily classes",
+      "training": "Training with a personal trainer",
+      "subtitle_training": "Individual approach",
+      "swimming": "Swimming Pool",
+      "subtitle_swimming": "Relaxation and recovery"
+    },
+    "schedule": {
+      "tag": "Planning",
+      "title": "Class Schedule",
+      "description": "Weekly class schedule with professional instructors",
+      "coming_soon": "Training schedule will be available soon. For current information, please contact us.",
+      "contact_button": "Contact Us"
+    },
+    "facilities": {
+      "title": "Our Facilities",
+      "gym": {
+        "title": "Gym",
+        "description": "Over 70 pieces of professional equipment"
+      },
+      "fight_club": {
+        "title": "Fight Club",
+        "description": "Professional boxing and MMA facility"
+      },
+      "swimming": {
+        "title": "Swimming Center",
+        "description": "25m swimming lane"
+      },
+      "dance": {
+        "title": "Dance Studio",
+        "description": "For yoga and dance classes"
+      }
+    },
+    "membership": {
+      "title": "Membership Options",
+      "description": "Choose the plan that works for you"
+    },
+    "charity": {
+      "title": "Charity Workouts",
+      "description": "Saturday workouts with professional athletes, all proceeds go to Child Watch Phuket Foundation"
+    }
+  },
+  "beauty": {
+    "title": "Beauty Salon",
+    "description": "Full-cycle beauty salon for all your needs",
+    "services": {
+      "title": "Our Services",
+      "categories": {
+        "cosmetology": "Cosmetology",
+        "laser": "Laser Procedures",
+        "endosphere": "Endosphere Therapy",
+        "nails": "Nail Care",
+        "hair": "Hair Styling & Care"
+      }
+    },
+    "specialists": {
+      "title": "Our Specialists",
+      "description": "Meet our professional team"
+    },
+    "booking": {
+      "title": "Book an Appointment",
+      "description": "Schedule your beauty treatment"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "description": "KAIF - Jungle Club & Spa is Phuket's premier wellness complex",
+    "overview": {
+      "title": "Complex Overview",
+      "description": "Detailed information about all our facilities"
+    },
+    "features": {
+      "title": "Key Features",
+      "largest_sauna": "Thailand's largest sauna (50m²)",
+      "hammams": "Thai and Turkish hammams",
+      "restaurant": "Restaurant with 5 cuisines",
+      "dance_studio": "Dance and yoga studio (available for rent)",
+      "gym": "Fitness center with 70+ equipment",
+      "beauty_salon": "Full-cycle beauty salon",
+      "pool": "25m swimming pool",
+      "massage": "Various massage techniques",
+      "fight_club": "Fight club",
+      "kids_room": "Kids room (ages 3-14)"
+    },
+    "gallery": {
+      "title": "Gallery",
+      "description": "High-quality photos of all facilities"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "To provide an exceptional wellness experience in Phuket"
+    }
+  },
+  "promotions": {
+    "title": "Promotions",
+    "description": "Special offers and deals",
+    "day_pass": {
+      "title": "Day in Complex",
+      "price": "390 THB",
+      "description": "Access to gym, pool, ice bath and sauna",
+      "terms": "Terms and conditions apply"
+    },
+    "charity": {
+      "title": "Charity Workout",
+      "price": "200 THB",
+      "description": "Saturday training with professional athletes",
+      "foundation": "All proceeds go to Child Watch Phuket Foundation"
+    },
+    "seasonal": {
+      "title": "Seasonal Offers",
+      "description": "Limited-time offers"
+    },
+    "loyalty": {
+      "title": "Loyalty Program",
+      "description": "Rewards for our regular customers"
+    }
+  },
+  "contacts": {
+    "title": "Contact Us",
+    "form": {
+      "title": "Get in Touch",
+      "success": "Your message has been sent successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "hours": "Opening Hours: 7:00 - 22:00 daily"
+    },
+    "feedback": {
+      "title": "Feedback",
+      "description": "We value your opinion"
+    }
+  }
+}
