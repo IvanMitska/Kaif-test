@@ -472,8 +472,6 @@ const Header = () => {
     { path: '/restaurant', label: t('navigation.restaurant') },
     { path: '/spa', label: t('navigation.spa_and_beauty') },
     { path: '/sports', label: t('navigation.sports') },
-    { path: '/about', label: t('navigation.about') },
-    { path: '/promotions', label: t('navigation.promotions') },
     { path: '/contacts', label: t('navigation.contacts') },
   ];
 

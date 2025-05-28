@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
-  ArrowRightIcon,
   CheckBadgeIcon,
   BuildingOffice2Icon,
   UserGroupIcon,
@@ -288,51 +286,55 @@ const AboutPreviewSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.8,
-        staggerChildren: 0.1
+        staggerChildren: 0.2
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
-      opacity: 1,
       y: 0,
+      opacity: 1,
       transition: {
-        duration: 0.6,
-        ease: "easeOut"
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1.0]
       }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: {
-      opacity: 1,
+    hidden: { y: 30, opacity: 0 },
+    visible: custom => ({
       y: 0,
-      scale: 1,
+      opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        delay: custom * 0.1,
+        ease: [0.25, 0.1, 0.25, 1.0]
       }
-    }
+    })
   };
 
-  // Статистики
+  // Stats
   const stats = [
-    { number: '7', label: 'Зон отдыха' },
-    { number: '50м²', label: 'Сауна' },
+    { number: '50м²', label: 'Самая большая сауна' },
+    { number: '70+', label: 'Тренажеров' },
     { number: '5', label: 'Кухонь мира' },
-    { number: '70+', label: 'Тренажеров' }
+    { number: '25м', label: 'Олимпийский бассейн' },
   ];
 
   // Особенности комплекса
   const features = [
     {
+      icon: <SparklesIcon />,
+      title: 'СПА-комплекс',
+      description: 'Самая большая сауна в Таиланде, хаммам и массажные кабинеты'
+    },
+    {
       icon: <BuildingOffice2Icon />,
-      title: 'Фитнес-центр',
-      description: '70+ тренажеров, кардио-зона, функциональный тренинг'
+      title: 'Тренажерный зал',
+      description: 'Более 70 современных тренажеров и профессиональные тренеры'
     },
     {
       icon: <UserGroupIcon />,
@@ -341,18 +343,13 @@ const AboutPreviewSection = () => {
     },
     {
       icon: <BuildingOffice2Icon />,
-      title: 'Бассейн 25м',
-      description: 'Олимпийский стандарт с подогревом и aqua-фитнесом'
+      title: 'Олимпийский бассейн',
+      description: '25-метровый бассейн с подогревом и аква-фитнесом'
     },
     {
       icon: <SparklesIcon />,
-      title: 'СПА-центр',
-      description: 'Тайский массаж, ароматерапия, горячие камни'
-    },
-    {
-      icon: <BuildingOffice2Icon />,
       title: 'Ресторан',
-      description: '5 кухонь мира с панорамной террасой'
+      description: '5 кухонь мира, здоровое питание и панорамная терраса'
     },
     {
       icon: <SparklesIcon />,
@@ -384,8 +381,16 @@ const AboutPreviewSection = () => {
               </AboutTitle>
               
               <AboutDescription variants={itemVariants}>
-                Современное пространство, объединяющее спорт, релаксацию, 
-                гастрономию и красоту в одном месте на острове Пхукет.
+                KAIF PHUKET – это премиальный комплекс, где вы восстанавливаете силы, заряжаетесь энергией и 
+                наслаждаетесь каждым моментом. Всё здесь создано так, чтобы вам хотелось 
+                вернуться: тренировки, которые вдохновляют, отдых, который наполняет, и 
+                атмосфера, которая дарит настоящий кайф.  
+              </AboutDescription>
+              
+              <AboutDescription variants={itemVariants}>
+                Мы создали уникальное пространство на Пхукете, где премиальный сервис 
+                встречается с тайским гостеприимством. KAIF — это не просто спа-комплекс, 
+                это философия здорового образа жизни и гармонии.
               </AboutDescription>
 
               {/* Статистики */}
@@ -405,17 +410,7 @@ const AboutPreviewSection = () => {
                 ))}
               </StatsGrid>
 
-              <motion.div variants={itemVariants}>
-                <Link to="/about">
-                  <CTAButton
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span>Узнать больше</span>
-                    <ArrowRightIcon />
-                  </CTAButton>
-                </Link>
-              </motion.div>
+              {/* Кнопка удалена, так как страница "О нас" больше не существует */}
             </AboutContent>
 
             {/* Features Grid */}

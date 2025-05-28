@@ -18,8 +18,7 @@ import RestaurantPage from './pages/RestaurantPage';
 import SpaPage from './pages/SpaPage';
 import SportsPage from './pages/SportsPage';
 import BeautyPage from './pages/BeautyPage';
-import AboutPage from './pages/AboutPage';
-import PromotionsPage from './pages/PromotionsPage';
+// Импорт AboutPageNew удален, так как компонент больше не используется
 import ContactsPage from './pages/ContactsPage';
 
 function App() {
@@ -42,8 +41,7 @@ function App() {
               <Route path="/spa" element={<SpaPage />} />
               <Route path="/sports" element={<SportsPage />} />
               <Route path="/beauty" element={<BeautyPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/promotions" element={<PromotionsPage />} />
+              {/* Маршрут О нас удален */}
               <Route path="/contacts" element={<ContactsPage />} />
             </Routes>
           </Layout>

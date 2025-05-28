@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -6,11 +6,18 @@ import { motion } from 'framer-motion';
 import { 
   ArrowRightIcon,
   SparklesIcon,
-  StarIcon
+  StarIcon,
+  HeartIcon,
+  UserGroupIcon,
+  ClockIcon,
+  CheckCircleIcon
 } from '@heroicons/react/24/solid';
 
-// Используем плейсхолдер для изображения
-const spaHeroImage = 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80';
+// Используем коллекцию премиальных изображений для многослойного коллажа
+const spaMainImage = 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=85'; // Главное изображение спа процедуры
+const spaDetailImage1 = 'https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; // Изображение с маслами и цветами
+const spaDetailImage2 = 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; // Изображение релаксации
+const spaDetailImage3 = 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'; // Декоративное изображение с камнями
 
 // =============================================================================
 // СОВРЕМЕННЫЙ НЕЖНЫЙ SPA & BEAUTY HERO
@@ -20,13 +27,14 @@ const HeroContainer = styled.section`
   position: relative;
   min-height: 100vh;
   background: linear-gradient(135deg, 
-    #fdfcfb 0%,
-    #f5f3f0 30%,
-    #ede9e4 100%
+    #fcfaf8 0%,
+    #f7f4f0 60%,
+    #f4f0eb 100%
   );
   overflow: hidden;
   display: flex;
   align-items: center;
+  padding: 6rem 0;
   
   &::before {
     content: '';
@@ -35,10 +43,18 @@ const HeroContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 20% 80%, rgba(144, 179, 167, 0.06) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(184, 196, 168, 0.06) 0%, transparent 50%);
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(144, 179, 167, 0.07) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(212, 165, 116, 0.07) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 40%, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
     z-index: 1;
+    pointer-events: none;
   }
+`;
+
+// Убираем шум для улучшения производительности
+const Noise = styled.div`
+  display: none;
 `;
 
 const FloatingElements = styled.div`
@@ -47,26 +63,48 @@ const FloatingElements = styled.div`
   height: 100%;
   overflow: hidden;
   z-index: 2;
+  pointer-events: none;
 `;
 
 const FloatingCircle = styled(motion.div)`
   position: absolute;
   border-radius: 50%;
   background: ${props => props.$color};
-  filter: blur(50px);
-  opacity: 0.4;
+  filter: blur(${props => props.$blur || '30px'});
+  opacity: ${props => props.$opacity || 0.25};
+  mix-blend-mode: ${props => props.$blendMode || 'normal'};
+  will-change: transform;
+`;
+
+const FloatingShape = styled(motion.div)`
+  position: absolute;
+  background: ${props => props.$gradient || 'linear-gradient(135deg, rgba(144, 179, 167, 0.2) 0%, rgba(144, 179, 167, 0.01) 100%)'};
+  border-radius: ${props => props.$borderRadius || '30% 70% 70% 30% / 30% 30% 70% 70%'};
+  filter: blur(${props => props.$blur || '0px'});
+  opacity: ${props => props.$opacity || 0.1};
+  z-index: ${props => props.$zIndex || 1};
+  mix-blend-mode: ${props => props.$blendMode || 'normal'};
+  transform-origin: center center;
+  box-shadow: ${props => props.$shadow || 'none'};
+  border: ${props => props.$border || 'none'};
+  overflow: ${props => props.$overflow || 'visible'};
+  will-change: transform;
 `;
 
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 0 1.5rem;
   
-  @media (min-width: 1024px) {
-    padding: 2rem;
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+  
+  @media (min-width: 1280px) {
+    padding: 0 3rem;
   }
 `;
 
@@ -75,21 +113,30 @@ const HeroGrid = styled.div`
   grid-template-columns: 1fr;
   gap: 4rem;
   align-items: center;
-  min-height: 80vh;
+  position: relative;
+  z-index: 2;
   
   @media (min-width: 1024px) {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 6rem;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 1280px) {
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 4rem;
   }
 `;
 
 const MainContent = styled(motion.div)`
+  position: relative;
   text-align: left;
-  max-width: 580px;
+  max-width: 600px;
+  z-index: 10;
   
   @media (max-width: 1023px) {
     text-align: center;
     margin: 0 auto;
+    padding-top: 2rem;
   }
 `;
 
@@ -98,35 +145,42 @@ const Badge = styled(motion.div)`
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, rgba(144, 179, 167, 0.12) 0%, rgba(184, 196, 168, 0.12) 100%);
-  border: 1px solid rgba(144, 179, 167, 0.2);
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.12) 0%, rgba(144, 179, 167, 0.15) 100%);
+  border: 1px solid rgba(212, 165, 116, 0.2);
   border-radius: 30px;
   font-family: ${({ theme }) => theme?.fonts?.primary || 'Inter, sans-serif'};
   font-size: 0.875rem;
   font-weight: 500;
-  color: #6B8471;
+  color: #8A6C55;
   backdrop-filter: blur(20px);
   margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(144, 179, 167, 0.08);
+  box-shadow: 0 4px 15px rgba(212, 165, 116, 0.08);
+  letter-spacing: 0.03em;
   
   svg {
     width: 1rem;
     height: 1rem;
-    color: #90B3A7;
+    color: #D4A574;
   }
 `;
 
 const Title = styled(motion.h1)`
   font-family: ${({ theme }) => theme?.fonts?.elegant || '"Playfair Display", serif'};
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(2.75rem, 7vw, 4.5rem);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.1;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #5A6B5D 0%, #7A8A7D 50%, #90B3A7 100%);
+  background: linear-gradient(135deg, 
+    #5A6B5D 0%, 
+    #7A8A7D 40%, 
+    #90B3A7 70%, 
+    #D4A574 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  text-shadow: 0px 10px 30px rgba(90, 107, 93, 0.1);
 `;
 
 const Subtitle = styled(motion.h2)`
@@ -209,8 +263,8 @@ const PrimaryButton = styled(motion.button)`
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #90B3A7 0%, #B8C4A8 100%);
+  padding: 1.1rem 2.75rem;
+  background: linear-gradient(135deg, #D4A574 0%, #90B3A7 100%);
   color: white;
   font-family: ${({ theme }) => theme?.fonts?.heading || '"Poppins", sans-serif'};
   font-size: 1rem;
@@ -219,17 +273,35 @@ const PrimaryButton = styled(motion.button)`
   border-radius: 50px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(144, 179, 167, 0.3);
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  box-shadow: 0 10px 30px rgba(212, 165, 116, 0.3), 0 5px 15px rgba(144, 179, 167, 0.2);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+    transition: all 0.4s ease;
+  }
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(144, 179, 167, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4), 0 8px 20px rgba(144, 179, 167, 0.2);
+  }
+  
+  &:hover::before {
+    transform: translateY(100%);
   }
   
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 1.1rem;
+    height: 1.1rem;
   }
 `;
 
@@ -273,21 +345,22 @@ const VisualSection = styled(motion.div)`
 
 const ImageContainer = styled(motion.div)`
   position: relative;
-  height: 300px;
-  border-radius: 30px;
+  height: 400px;
+  border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(144, 179, 167, 0.12);
+  box-shadow: 0 30px 80px rgba(144, 179, 167, 0.15), 0 10px 30px rgba(212, 165, 116, 0.1);
   margin-bottom: 2rem;
   
   @media (min-width: 1024px) {
-    height: 400px;
+    height: 480px;
   }
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    transition: transform 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+    filter: brightness(1.03) saturate(1.05);
   }
   
   &:hover img {
@@ -301,7 +374,11 @@ const ImageContainer = styled(motion.div)`
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(144, 179, 167, 0.08) 0%, rgba(184, 196, 168, 0.08) 100%);
+    background: linear-gradient(135deg, 
+      rgba(212, 165, 116, 0.05) 0%, 
+      rgba(144, 179, 167, 0.05) 50%,
+      rgba(184, 196, 168, 0.05) 100%
+    );
     z-index: 1;
   }
 `;
@@ -313,34 +390,42 @@ const ServicesGrid = styled.div`
 `;
 
 const ServiceCard = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(144, 179, 167, 0.1);
-  border-radius: 20px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(212, 165, 116, 0.1);
+  border-radius: 24px;
+  padding: 1.75rem 1.5rem;
+  transition: all 0.4s cubic-bezier(0.33, 1, 0.68, 1);
   cursor: pointer;
   text-align: center;
+  box-shadow: 0 5px 15px rgba(144, 179, 167, 0.05);
   
   &:hover {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: rgba(144, 179, 167, 0.2);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(144, 179, 167, 0.12);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(212, 165, 116, 0.25);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(144, 179, 167, 0.1), 0 10px 20px rgba(212, 165, 116, 0.05);
   }
 `;
 
 const ServiceIcon = styled.div`
-  width: 3rem;
-  height: 3rem;
-  margin: 0 auto 1rem;
-  background: linear-gradient(135deg, #90B3A7 0%, #B8C4A8 100%);
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1.25rem;
+  background: linear-gradient(135deg, #D4A574 0%, #90B3A7 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 25px rgba(212, 165, 116, 0.2);
+  transition: all 0.4s ease;
+  
+  ${ServiceCard}:hover & {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(212, 165, 116, 0.25);
+  }
 `;
 
 const ServiceTitle = styled.h3`
@@ -366,41 +451,41 @@ const ServiceDescription = styled.p`
 const SpaHeroSection = () => {
   const { t } = useTranslation();
 
-  // Анимации
-  const containerVariants = {
+  // Упрощенные и оптимизированные анимации
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 1,
-        staggerChildren: 0.15
+        duration: 0.6,
+        staggerChildren: 0.08
       }
     }
-  };
+  }), []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.5,
         ease: "easeOut"
       }
     }
-  };
+  }), []);
 
-  const floatVariants = {
+  const floatVariants = useMemo(() => ({
     initial: { y: 0 },
     animate: {
-      y: [-10, 10, -10],
+      y: [-5, 5, -5],
       transition: {
-        duration: 8,
+        duration: 6,
         repeat: Infinity,
         ease: "easeInOut"
       }
     }
-  };
+  }), []);
 
   // SPA услуги
   const spaServices = [
@@ -415,12 +500,12 @@ const SpaHeroSection = () => {
       description: 'Паровые и тепловые процедуры'
     },
     {
-      icon: '💎',
+      icon: '💆‍♀️',
       title: 'Косметология',
-      description: 'Уходовые процедуры для лица'
+      description: 'Премиальные уходовые процедуры'
     },
     {
-      icon: '🏛️',
+      icon: '🧘‍♀️',
       title: 'Wellness',
       description: 'Комплексные программы здоровья'
     }
@@ -434,29 +519,17 @@ const SpaHeroSection = () => {
 
   return (
     <HeroContainer>
+      {/* Уменьшаем количество анимированных элементов */}
       <FloatingElements>
         <FloatingCircle
-          $color="linear-gradient(135deg, rgba(144, 179, 167, 0.08) 0%, rgba(184, 196, 168, 0.08) 100%)"
-          style={{ width: '250px', height: '250px', top: '10%', left: '10%' }}
-          variants={floatVariants}
-          initial="initial"
-          animate="animate"
+          $color="linear-gradient(135deg, rgba(144, 179, 167, 0.05) 0%, rgba(184, 196, 168, 0.05) 100%)"
+          style={{ width: '200px', height: '200px', top: '15%', left: '10%' }}
+          animate={{ y: [-5, 5, -5] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <FloatingCircle
-          $color="linear-gradient(135deg, rgba(184, 196, 168, 0.06) 0%, rgba(144, 179, 167, 0.06) 100%)"
-          style={{ width: '180px', height: '180px', top: '60%', right: '15%' }}
-          variants={floatVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 3 }}
-        />
-        <FloatingCircle
-          $color="linear-gradient(135deg, rgba(144, 179, 167, 0.04) 0%, rgba(255, 255, 255, 0.1) 100%)"
-          style={{ width: '120px', height: '120px', bottom: '20%', left: '60%' }}
-          variants={floatVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 6 }}
+          $color="linear-gradient(135deg, rgba(184, 196, 168, 0.04) 0%, rgba(144, 179, 167, 0.04) 100%)"
+          style={{ width: '150px', height: '150px', top: '60%', right: '15%' }}
         />
       </FloatingElements>
 
@@ -524,16 +597,59 @@ const SpaHeroSection = () => {
 
             {/* Визуальная секция */}
             <VisualSection variants={itemVariants}>
-              <ImageContainer
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                style={{ position: 'relative' }}
               >
-                <img 
-                  src={spaHeroImage} 
-                  alt="SPA процедуры"
-                  loading="eager" /* Улучшает производительность за счет приоритетной загрузки */
-                />
-              </ImageContainer>
+                <ImageContainer
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img 
+                    src={spaMainImage} 
+                    alt="SPA и релаксация"
+                    loading="eager"
+                  />
+                </ImageContainer>
+                
+                {/* Малое декоративное изображение - новый элемент */}
+                {/* Показываем детальное изображение только на больших экранах для оптимизации */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  style={{
+                    position: 'absolute',
+                    bottom: '15%',
+                    right: '-10%',
+                    width: '40%',
+                    height: '180px',
+                    borderRadius: '24px',
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px rgba(144, 179, 167, 0.15)',
+                    zIndex: 5,
+                    display: 'none'
+                  }}
+                  css={`
+                    @media (min-width: 1280px) {
+                      display: block !important;
+                    }
+                  `}
+                >
+                  <img 
+                    src={spaDetailImage1} 
+                    alt="Детали SPA"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: 'brightness(1.05) saturate(1.05)'
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
 
               <ServicesGrid>
                 {spaServices.map((service, index) => (
@@ -541,7 +657,7 @@ const SpaHeroSection = () => {
                     key={index}
                     variants={itemVariants}
                     whileHover={{ scale: 1.03 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
                     <ServiceIcon>{service.icon}</ServiceIcon>
                     <ServiceTitle>{service.title}</ServiceTitle>

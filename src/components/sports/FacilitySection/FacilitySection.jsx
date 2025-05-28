@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { 
   CalendarIcon, 
   ClockIcon, 
   UserGroupIcon, 
-  SparklesIcon 
+  SparklesIcon,
+  CheckIcon,
+  UsersIcon,
+  MapPinIcon,
+  StarIcon,
+  UserIcon
 } from '@heroicons/react/24/outline';
 
 import {
@@ -16,7 +21,28 @@ import {
   GalleryImage,
   FacilityFeature,
   FacilityMeta,
-  FacilityMetaItem
+  FacilityMetaItem,
+  ScheduleContainer,
+  ScheduleHeader,
+  BookScheduleButton,
+  ScheduleNote,
+  ScheduleWrapper,
+  ScheduleActions,
+  ScheduleFilterContainer,
+  ScheduleFilterButton,
+  FilterLabel,
+  ScheduleGrid,
+  ScheduleCard,
+  ScheduleTime,
+  ClassTitle,
+  ClassInfo,
+  ClassTag,
+  ClassTags,
+  NoClassesMessage,
+  ClassHeader,
+  ClassTime,
+  ClassInstructor,
+  ClassLocation
 } from './FacilityStyles';
 
 import { Section, SectionTag, SectionTitle, SectionSubtitle, ContentContainer, TopRightShape, BookButton } from '../../../styles/sports/CommonStyles';
@@ -33,6 +59,7 @@ import fightImage3 from '../../../assets/images/sports/fight-club/fight-3.jpg';
 
 const FacilitySection = () => {
   const { t } = useTranslation();
+  const [filter, setFilter] = useState('all');
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -299,6 +326,36 @@ const FacilitySection = () => {
               <p>{t('sports.facilities.dance.description1', 'Просторная танцевальная студия с профессиональным покрытием, зеркальными стенами и передовой аудиосистемой создает идеальные условия для различных танцевальных направлений и групповых занятий.')}</p>
               <p>{t('sports.facilities.dance.description2', 'Здесь проходят занятия по современным и классическим танцевальным направлениям, а также групповые фитнес-тренировки под руководством опытных инструкторов.')}</p>
             </FacilityDescription>
+            
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <FacilityFeature variants={itemVariants}>
+                <SparklesIcon />
+                <span>{t('sports.facilities.dance.feature4', 'Гибкое расписание групповых и индивидуальных занятий')}</span>
+              </FacilityFeature>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              style={{ margin: '2rem 0' }}
+            >
+              <BookButton
+                whileHover={{ scale: 1.05, boxShadow: '0 15px 30px rgba(0, 0, 0, 0.1)' }}
+                whileTap={{ scale: 0.95 }}
+                style={{ display: 'flex', margin: '0 auto' }}
+                onClick={() => window.location.href = '#schedule'}
+              >
+                {t('sports.facilities.dance.view_schedule', 'Посмотреть расписание')}
+                <CalendarIcon style={{ width: '18px', height: '18px', marginLeft: '8px' }} />
+              </BookButton>
+            </motion.div>
             
             <motion.div
               variants={containerVariants}

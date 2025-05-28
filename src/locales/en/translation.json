@@ -158,7 +158,10 @@
     "hero": {
       "tag": "Fitness & Sports",
       "title": "Reach new <span>sports heights</span> with KAIF",
-      "subtitle": "At KAIF Jungle Club & SPA you will find everything you need for an active lifestyle, workouts and sports recreation in an atmosphere of luxury and comfort.",
+      "subtitle": "Our premium sports facilities are designed to accommodate various fitness levels and goals.",
+      "cta": "Explore Facilities",
+      "primary_cta": "Book a training",
+      "secondary_cta": "Learn more",
       "stats": {
         "facilities": "Sports Facilities",
         "trainers": "Professional Trainers",
@@ -200,22 +203,58 @@
       "contact_button": "Contact Us"
     },
     "facilities": {
+      "tag": "Our facilities",
+      "subtitle": "KAIF offers a wide selection of premium sports spaces with cutting-edge equipment and professional trainers to help you achieve your fitness goals.",
       "title": "Our Facilities",
       "gym": {
         "title": "Gym",
-        "description": "Over 70 pieces of professional equipment"
+        "description": "Over 70 pieces of professional equipment",
+        "hours": "06:00 - 23:00",
+        "capacity": "Up to 40 people",
+        "description1": "Our gym is equipped with modern premium equipment from leading manufacturers. Here you will find everything you need for effective workouts - from free weights to the latest generation of cardio machines.",
+        "description2": "The spacious room with panoramic windows creates the perfect atmosphere for training, and professional trainers are always ready to help create an individual program.",
+        "feature1": "Premium Technogym and Life Fitness equipment",
+        "feature2": "Functional training area",
+        "feature3": "Individual training with certified trainers"
+      },
+      "book_button": "Book a training session",
+      "fight": {
+        "title": "Fight Club",
+        "description": "Professional boxing and MMA facility",
+        "hours": "08:00 - 22:00",
+        "capacity": "Up to 25 people",
+        "description1": "KAIF Fighting Club is a modern space for training in various martial arts. Professional ring, punching bags, heavy bags, and special flooring create ideal conditions for both beginners and experienced fighters.",
+        "description2": "Our trainers are experienced fighters and champions who will help you master techniques and achieve high results in your chosen martial art.",
+        "feature1": "Professional boxing ring",
+        "feature2": "Boxing, Muay Thai, and MMA training",
+        "feature3": "Trainers with international certifications"
       },
       "fight_club": {
         "title": "Fight Club",
-        "description": "Professional boxing and MMA facility"
-      },
-      "swimming": {
-        "title": "Swimming Center",
-        "description": "25m swimming lane"
+        "description": "Professional boxing and MMA facility",
+        "hours": "08:00 - 22:00",
+        "capacity": "Up to 25 people",
+        "description1": "KAIF Fighting Club is a modern space for training in various martial arts. Professional ring, punching bags, heavy bags, and special flooring create ideal conditions for both beginners and experienced fighters.",
+        "description2": "Our trainers are experienced fighters and champions who will help you master techniques and achieve high results in your chosen martial art.",
+        "feature1": "Professional boxing ring",
+        "feature2": "Boxing, Muay Thai, and MMA training",
+        "feature3": "Trainers with international certifications"
       },
       "dance": {
         "title": "Dance Studio",
-        "description": "For yoga and dance classes"
+        "description": "For yoga and dance classes",
+        "hours": "09:00 - 21:00",
+        "capacity": "Up to 30 people",
+        "description1": "Spacious dance studio with professional flooring, mirrored walls and advanced audio system creates ideal conditions for various dance styles and group classes.",
+        "description2": "Classes in modern and classical dance styles are held here, as well as group fitness training under the guidance of experienced instructors.",
+        "feature4": "Flexible schedule for group and individual classes",
+        "schedule_title": "Classes and Schedule",
+        "schedule_subtitle": "Find the right class",
+        "filter_label": "Filter:",
+        "filter_all": "All",
+        "filter_group": "Group",
+        "filter_personal": "Personal",
+        "filter_events": "Events"
       }
     },
     "membership": {

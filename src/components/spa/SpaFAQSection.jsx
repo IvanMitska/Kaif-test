@@ -83,8 +83,8 @@ const FaqQuestion = styled(motion.div)`
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 600;
-  color: ${props => props.isOpen ? 'white' : '#5A6B5D'};
-  background: ${props => props.isOpen 
+  color: ${props => props.$isOpen ? 'white' : '#5A6B5D'};
+  background: ${props => props.$isOpen 
     ? 'linear-gradient(135deg, #90B3A7 0%, #B8C4A8 100%)' 
     : 'transparent'
   };
@@ -92,11 +92,11 @@ const FaqQuestion = styled(motion.div)`
   font-family: ${props => props.theme?.fonts?.heading || '"Poppins", sans-serif'};
 
   &:hover {
-    background: ${props => props.isOpen 
+    background: ${props => props.$isOpen 
       ? 'linear-gradient(135deg, #90B3A7 0%, #B8C4A8 100%)' 
       : 'rgba(144, 179, 167, 0.1)'
     };
-    color: ${props => props.isOpen ? 'white' : '#90B3A7'};
+    color: ${props => props.$isOpen ? 'white' : '#90B3A7'};
   }
 `;
 
@@ -112,9 +112,9 @@ const FaqAnswer = styled(motion.div)`
 
 const IconWrapper = styled.span`
   font-size: 1rem;
-  color: ${props => props.isOpen ? 'white' : '#90B3A7'};
+  color: ${props => props.$isOpen ? 'white' : '#90B3A7'};
   transition: all 0.3s ease;
-  transform: ${props => props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
+  transform: ${props => props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
 `;
 
 const SpaFAQSection = () => {
@@ -229,10 +229,10 @@ const SpaFAQSection = () => {
             >
               <FaqQuestion 
                 onClick={() => toggleItem(index)} 
-                isOpen={openIndex === index}
+                $isOpen={openIndex === index}
               >
                 {item.question}
-                <IconWrapper isOpen={openIndex === index}>
+                <IconWrapper $isOpen={openIndex === index}>
                   {openIndex === index ? <FaMinus /> : <FaPlus />}
                 </IconWrapper>
               </FaqQuestion>

@@ -376,23 +376,22 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const navigationLinks = [
-    { path: '/', label: t('navigation.home') },
-    { path: '/restaurant', label: t('navigation.restaurant') },
-    { path: '/spa', label: t('navigation.spa') },
-    { path: '/sports', label: t('navigation.sports') },
-    { path: '/beauty', label: t('navigation.beauty') },
-    { path: '/about', label: t('navigation.about') },
-    { path: '/promotions', label: t('navigation.promotions') },
-    { path: '/contacts', label: t('navigation.contacts') }
+    { path: '/', label: t('navigation.home'), id: 'home' },
+    { path: '/restaurant', label: t('navigation.restaurant'), id: 'restaurant' },
+    { path: '/spa', label: t('navigation.spa_and_beauty'), id: 'spa' },
+    { path: '/sports', label: t('navigation.sports'), id: 'sports-main' },
+    { path: '/about', label: t('navigation.about'), id: 'about' },
+    { path: '/contacts', label: t('navigation.contacts'), id: 'contacts' },
+    { path: '/promotions', label: t('navigation.promotions'), id: 'promotions' },
   ];
 
   const serviceLinks = [
-    { path: '/spa', label: 'Сауна и хаммам' },
-    { path: '/restaurant', label: 'Ресторан' },
-    { path: '/sports', label: 'Фитнес-центр' },
-    { path: '/beauty', label: 'Салон красоты' },
-    { path: '/sports', label: 'Бойцовский клуб' },
-    { path: '/promotions', label: 'Акции' }
+    { path: '/spa', label: 'Сауна и хаммам', id: 'spa-sauna' },
+    { path: '/restaurant', label: 'Ресторан', id: 'restaurant' },
+    { path: '/sports', label: 'Фитнес-центр', id: 'sports-fitness' },
+    { path: '/beauty', label: 'Салон красоты', id: 'beauty' },
+    { path: '/sports', label: 'Бойцовский клуб', id: 'sports-club' },
+    { path: '/promotions', label: 'Акции', id: 'promotions' },
   ];
 
   return (
@@ -476,8 +475,8 @@ const Footer = () => {
             {/* Navigation */}
             <FooterSection variants={itemVariants}>
               <SectionTitle>Навигация</SectionTitle>
-              {navigationLinks.slice(0, 6).map((link) => (
-                <FooterLink key={link.path} to={link.path}>
+              {navigationLinks.map((link) => (
+                <FooterLink key={link.id} to={link.path}>
                   {link.label}
                 </FooterLink>
               ))}
@@ -487,7 +486,7 @@ const Footer = () => {
             <FooterSection variants={itemVariants}>
               <SectionTitle>Услуги</SectionTitle>
               {serviceLinks.map((link) => (
-                <FooterLink key={link.path} to={link.path}>
+                <FooterLink key={link.id} to={link.path}>
                   {link.label}
                 </FooterLink>
               ))}
